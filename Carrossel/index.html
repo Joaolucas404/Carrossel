@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/8d1b573c80.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="slide.css">
+    <title>carroça</title>
+</head>
+<body>
+    <div class="slide">
+        <div class="slides">
+        <div id="back" class="btn">
+            <i class="fas fa-chevron-left"></i>
+        </div>
+        <div id="next" class="btn">
+            <i class="fas fa-chevron-right"></i>
+        </div>
+        <div id="atual" class="images">
+            <img src="img/monkey.jpg" alt="">
+        </div>
+        <div class="images">
+            <img src="img/Cruela.jpg" alt="">
+        </div>
+        <div class="images">
+            <img src="img/jordan1.jpeg" alt="">
+        </div>
+        <div class="images">
+            <img src="img/jordan2.jpeg" alt="">
+        </div>
+    </div>
+    <div class="balls">
+    </div>
+    </div>
+</body>
+<script>
+var balls = document.querySelector('.balls')
+var quant = document.querySelectorAll('.slides .images')
+var atual = 0
+var images = document.getElementById('atual')
+var next = document.getElementById('next')
+var back = document.getElementById('back')
+var rolar = true
+
+for(let i=0; i < quant.length; i++){
+        var div = document.createElement('div')
+        div.id = i
+        balls.appendChild(div)
+    }
+    document.getElementById('0').classList.add('imgAtual')
+
+    var pos = document.querySelectorAll('.balls div')
+
+    for(let i=0; i< pos.length; i++){
+        pos[i].addEventListener('click', ()=>{
+            atual= pos[i].id 
+            rolar = false
+            slide()
+        })
+    }
+    back.addEventListener('click', ()=>{
+        atual--
+        rolar = false
+        slide()
+    })
+    next.addEventListener('click', ()=>{
+        atual++
+        rolar = false
+        slide()
+    })
+    function slide(){
+        if(atual >= quant.length){
+            atual = 0
+        }
+    else if(atual < 0){
+        atual = quant.length-1
+    }
+    document.querySelector('.imgAtual').classList.remove('.imgAtual')
+    images.style.marginLeft = -1024*atual+'px'
+    document.getElementById(atual).classList.add('imgAtual')
+}  
+setInterval(()=>{
+    if(rolar){
+    atual++
+    slide()
+}
+else{
+    rolar = true
+}
+},4000)
+</script>
+</html>
